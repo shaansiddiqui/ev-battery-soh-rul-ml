@@ -1,0 +1,7 @@
+feature,mean_absolute_shap_value
+mean_voltage,6.5792613
+discharge_duration,2.1888587
+mean_current,1.8721774
+mean_temperature,0.25561264
+max_temperature,0.07169565
+voltage_headroom,0.036471367

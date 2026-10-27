@@ -1,0 +1,2 @@
+battery_id,cycle_number,actual_soh_percent,predicted_soh_percent,absolute_error_percent,selected_model
+B0018,75,79.9633550923934,79.81904,0.1443167012801183,XGBoost
