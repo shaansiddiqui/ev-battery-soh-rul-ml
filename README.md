@@ -1,15 +1,17 @@
-# EV Battery SOH and RUL Prediction
+# Explainable EV Battery SOH Monitoring and RUL Analysis
 
 Machine-learning project for predicting lithium-ion battery State of Health (SOH) and Remaining Useful Life (RUL) using the NASA PCoE Battery Aging Dataset.
 
-## Features
+## Key Features
 
-- Cycle-level voltage, current, temperature, and discharge-duration features
+- Cycle-level feature extraction from NASA PCoE Li-ion battery data
 - SOH calculation from measured capacity
-- RUL calculation using 80% SOH as end-of-life threshold
 - Leave-One-Battery-Out validation across B0005, B0006, B0007, and B0018
 - Linear Regression, Random Forest, and XGBoost model comparison
-- Planned SHAP explainability and Streamlit dashboard
+- XGBoost SOH model with mean LOBO R² = 0.850 and MAE = 3.21 percentage points
+- SHAP global and local explainability
+- Interactive Streamlit battery-health dashboard
+- Exploratory RUL modelling and battery-specific degradation analysis Planned SHAP explainability and Streamlit dashboard
 
 ## Run
 
@@ -17,12 +19,14 @@ Machine-learning project for predicting lithium-ion battery State of Health (SOH
 & ".\.venv\Scripts\python.exe" "src\lobo_soh_validation.py"
 & ".\.venv\Scripts\python.exe" "src\model_comparison_soh.py"
 
+## Explainable Dashboard
 
-### 5. Initialize Git
-
-Run these commands in the project root:
+Run the complete pipeline first:
 
 ```powershell
-git init
-git branch -M main
-git status
+& ".\.venv\Scripts\python.exe" "src\model_comparison_soh.py"
+& ".\.venv\Scripts\python.exe" "src\explain_soh_xgboost.py"
+
+## RUL Finding
+
+Direct global RUL prediction was evaluated using Linear Regression, Random Forest, and XGBoost. Results varied significantly between batteries because degradation rates were battery-specific. Therefore, the current validated deliverable focuses on SOH monitoring, while RUL forecasting remains an ongoing research component.
