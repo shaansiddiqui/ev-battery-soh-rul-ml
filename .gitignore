@@ -18,3 +18,7 @@ models/
 # Operating-system files
 .DS_Store
 Thumbs.db
+
+# Reproducible intermediate RUL outputs
+results/all_batteries_rul_features.csv
+results/rul_predictions_all_models.csv
