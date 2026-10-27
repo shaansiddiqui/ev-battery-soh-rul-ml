@@ -18,6 +18,7 @@ Machine-learning project for predicting lithium-ion battery State of Health (SOH
 ```powershell
 & ".\.venv\Scripts\python.exe" "src\lobo_soh_validation.py"
 & ".\.venv\Scripts\python.exe" "src\model_comparison_soh.py"
+```
 
 ## Explainable Dashboard
 
@@ -26,6 +27,13 @@ Run the complete pipeline first:
 ```powershell
 & ".\.venv\Scripts\python.exe" "src\model_comparison_soh.py"
 & ".\.venv\Scripts\python.exe" "src\explain_soh_xgboost.py"
+```
+
+Launch the dashboard:
+
+```powershell
+& ".\.venv\Scripts\python.exe" -m streamlit run dashboard\app.py
+```
 
 ## RUL Finding
 
