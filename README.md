@@ -11,7 +11,7 @@ Machine-learning project for predicting lithium-ion battery State of Health (SOH
 - XGBoost SOH model with mean LOBO R² = 0.850 and MAE = 3.21 percentage points
 - SHAP global and local explainability
 - Interactive Streamlit battery-health dashboard
-- Exploratory RUL modelling and battery-specific degradation analysis Planned SHAP explainability and Streamlit dashboard
+- Exploratory RUL modelling and battery-specific degradation analysis
 
 ## Run
 
