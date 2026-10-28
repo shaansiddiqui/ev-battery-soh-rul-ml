@@ -360,13 +360,16 @@ if raw_input_df is not None:
     result_df = raw_input_df.copy()
     result_df["predicted_soh_percent"] = predictions
 
-    health_data = [
-        get_health_status(prediction)
-        for prediction in predictions
-    ]
-
     result_df["health_status"] = [
-        item[0] for item in health_data
+        (
+            get_health_status(prediction)[0]
+            if "Compatible" in compatibility
+            else "Input Not Validated"
+        )
+        for prediction, compatibility in zip(
+            predictions,
+            prepared_df["input_compatibility"]
+        )
     ]
 
     result_df["input_compatibility"] = prepared_df[
@@ -395,7 +398,17 @@ if raw_input_df is not None:
     )
 
     selected_prediction = predictions[selected_row_index]
+
+    compatibility_message = prepared_df[
+        "input_compatibility"
+    ].iloc[selected_row_index]
+
+    is_compatible = "Compatible" in compatibility_message
+
     status, icon, message = get_health_status(selected_prediction)
+
+    if not is_compatible:
+        status = "Input Not Validated"
 
     metric_1, metric_2, metric_3 = st.columns(3)
 
@@ -420,7 +433,15 @@ if raw_input_df is not None:
         )
     )
 
-    if status == "Healthy":
+    if not is_compatible:
+        st.error(
+            "Input Not Validated: one or more feature values are outside "
+            "the observed training-data range. This SOH prediction is shown "
+            "for diagnostic purposes only and must not be used for a "
+            "maintenance decision."
+        )
+
+    elif status == "Healthy":
         st.success(f"{icon} {message}")
 
     elif status == "Monitor":
